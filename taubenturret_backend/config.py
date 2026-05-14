@@ -22,7 +22,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 API_HOST: str = os.getenv("API_HOST", "0.0.0.0")  # noqa: S104
-API_PORT: int = int(os.getenv("API_PORT", "8080"))
+API_PORT: int = int(os.getenv("API_PORT", "8081"))
 SAVE_IMAGES: str = os.getenv("SAVE_IMAGES", "detection")
 IMAGES_DIR: Path = Path(os.getenv("IMAGES_DIR", "./images"))
 LOG_LEVEL: str = os.getenv("LOG_LEVEL", "INFO").upper()

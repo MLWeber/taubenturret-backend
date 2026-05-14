@@ -4,7 +4,7 @@ services:
     container_name: taubenturret-backend
     restart: unless-stopped
     ports:
-      - "5149:8080"
+      - "8081:8081"
     volumes:
       # Mounts the local ./images directory to store saved detection images on the host machine
       - "./images:/app/images"
