@@ -23,6 +23,7 @@ from fastapi.responses import JSONResponse
 from PIL import Image, UnidentifiedImageError
 
 from taubenturret_backend import config
+from taubenturret_backend.detector import UnsupportedClassError
 
 router = APIRouter()
 
@@ -32,8 +33,17 @@ def ping() -> str:
     return "pong"
 
 
-@router.post("/detect/bird")
-async def detect_bird(request: Request, image: Annotated[UploadFile, File(...)]) -> JSONResponse:
+@router.get("/classes")
+def get_classes(request: Request) -> JSONResponse:
+    detector = request.app.state.detector
+    return JSONResponse(content={"success": True, "classes": list(detector.class_name_to_id.keys())})
+
+
+@router.post("/detect")
+@router.post("/detect/{classes}")
+async def detect_objects(
+    request: Request, image: Annotated[UploadFile, File(...)], classes: str | None = None
+) -> JSONResponse:
     contents = await image.read()
 
     try:
@@ -41,8 +51,13 @@ async def detect_bird(request: Request, image: Annotated[UploadFile, File(...)])
     except UnidentifiedImageError:
         raise HTTPException(status_code=400, detail="Invalid or corrupted image file") from None
 
-    detectors = request.app.state.detectors
-    detections = detectors["bird"].analyze(img)
+    class_list = [c.strip() for c in classes.split(",") if c.strip()] if classes else None
+
+    detector = request.app.state.detector
+    try:
+        detections = detector.analyze(img, classes=class_list)
+    except UnsupportedClassError as e:
+        raise HTTPException(status_code=400, detail=str(e)) from None
 
     if config.SAVE_IMAGES == "all" or (config.SAVE_IMAGES == "detection" and len(detections) > 0):
         # save image so we can use the false positives as training data later

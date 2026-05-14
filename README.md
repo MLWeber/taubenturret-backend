@@ -45,4 +45,10 @@ Or use docker-compose:
 docker compose up -d
 ```
 
-Once running, the API will accept POST requests on `/v1/detect/bird` with an attached image file.
+Once running, the API provides the following endpoints:
+* GET /v1/ping - Simple health check endpoint.
+* GET /v1/classes - Returns a list of all object classes supported by the loaded model.
+* POST /v1/detect - Detects all supported objects in an attached image file.
+* POST /v1/detect/{classes} - Detects only specific comma-separated classes (e.g., /v1/detect/bird,cat) in an attached image file.
+
+You can explore and test these endpoints using the built-in Swagger UI at http://localhost:8081/docs (assuming default port configuration).

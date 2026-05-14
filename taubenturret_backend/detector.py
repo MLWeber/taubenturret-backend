@@ -23,13 +23,28 @@ from ultralytics import YOLO
 logger = logging.getLogger(__name__)
 
 
-class Detector:
-    def __init__(self, included_classes: list[int], model: str) -> None:
-        self.model = YOLO(model, task="detect")
-        self.included_classes = included_classes
+class UnsupportedClassError(Exception):
+    """Exception raised when a requested class is not supported by the model."""
 
-    def analyze(self, img: Image.Image) -> list[dict[str, Any]]:
-        result = self.model(img, classes=self.included_classes, verbose=False)[0]
+
+class Detector:
+    def __init__(self, model: str) -> None:
+        self.model = YOLO(model, task="detect")
+
+        # Map class names to their IDs dynamically using the loaded model
+        self.class_name_to_id = {name: class_id for class_id, name in self.model.names.items()}
+
+    def analyze(self, img: Image.Image, classes: list[str] | None = None) -> list[dict[str, Any]]:
+        included_classes = None
+        if classes is not None:
+            included_classes = []
+            for cls in classes:
+                if cls not in self.class_name_to_id:
+                    msg = f"Class '{cls}' not recognized by the object detection model."
+                    raise UnsupportedClassError(msg)
+                included_classes.append(self.class_name_to_id[cls])
+
+        result = self.model(img, classes=included_classes, verbose=False)[0]
 
         logger.debug(f"Found {len(result)} object(s):")
         detections = []

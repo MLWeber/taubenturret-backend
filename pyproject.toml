@@ -1,6 +1,6 @@
 [project]
 name = "taubenturret-backend"
-version = "1.0.0"
+version = "1.1.0"
 description = "Backend for pigeon detection using YOLO and OpenVINO"
 authors = [{ name = "Michael Weber", email = "mweberw@pm.me" }]
 readme = "README.md"
