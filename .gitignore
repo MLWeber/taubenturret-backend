@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+.venv/
+*.pyc
+.env
+venv/
+*.pt
+
+# Application Data & Logs
+images/
+*.log
+
+# Models
+yolo_openvino_model/

@@ -1,0 +1,116 @@
+[project]
+name = "taubenturret-backend"
+version = "1.0.0"
+description = "Backend for pigeon detection using YOLO and OpenVINO"
+authors = [{ name = "Michael Weber", email = "mweberw@pm.me" }]
+readme = "README.md"
+keywords = ['python']
+license = { text = "GPLv3" }
+requires-python = ">=3.10,<4.0"
+classifiers = [
+    "Intended Audience :: Developers",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "fastapi>=0.110.0",
+    "uvicorn>=0.29.0",
+    "python-dotenv>=1.0.1",
+    "python-multipart>=0.0.9",
+    "pillow>=10.2.0",
+    "ultralytics>=8.1.0",
+    "openvino>=2024.1.0",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.3.0",
+    "mypy>=1.9.0",
+    "pytest>=8.0.0",
+    "pre-commit>=4.5.1",
+    "httpx>=0.27.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/MLWeber/taubenturret_backend"
+Repository = "https://github.com/MLWeber/taubenturret_backend"
+Documentation = "https://github.com/MLWeber/taubenturret_backend"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["taubenturret_backend"]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.mypy]
+files = ["taubenturret_backend"]
+disallow_untyped_defs = true
+disallow_any_unimported = true
+no_implicit_optional = true
+check_untyped_defs = true
+warn_return_any = true
+warn_unused_ignores = true
+show_error_codes = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 120
+fix = true
+
+[tool.ruff.lint]
+select = [
+    # flake8-2020
+    "YTT",
+    # flake8-bandit
+    "S",
+    # flake8-bugbear
+    "B",
+    # flake8-builtins
+    "A",
+    # flake8-comprehensions
+    "C4",
+    # flake8-debugger
+    "T10",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+    # mccabe
+    "C90",
+    # pycodestyle
+    "E",
+    "W",
+    # pyflakes
+    "F",
+    # pygrep-hooks
+    "PGH",
+    # pyupgrade
+    "UP",
+    # ruff
+    "RUF",
+    # tryceratops
+    "TRY",
+]
+ignore = [
+    # DoNotAssignLambda
+    "E731",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101"]
+
+[tool.ruff.format]
+preview = true

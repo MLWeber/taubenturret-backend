@@ -1,0 +1,13 @@
+services:
+  backend:
+    build: .
+    container_name: taubenturret-backend
+    restart: unless-stopped
+    ports:
+      - "5149:8080"
+    volumes:
+      # Mounts the local ./images directory to store saved detection images on the host machine
+      - "./images:/app/images"
+    environment:
+      - LOG_LEVEL=INFO # allowed values: DEBUG, INFO, WARNING, ERROR, CRITICAL
+      - SAVE_IMAGES=detection # When to save images. Options: [detection | all | no]
