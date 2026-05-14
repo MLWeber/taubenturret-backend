@@ -3,6 +3,7 @@ export
 
 API_HOST ?= 0.0.0.0
 API_PORT ?= 8080
+DATASET ?= coco.yaml
 
 .PHONY: install
 install: ## Install the virtual environment and install the pre-commit hooks
@@ -33,8 +34,8 @@ run: ## Run the taubenturret application
 
 .PHONY: model
 model: ## Export the YOLO model to OpenVINO format
-	@echo "🚀 Exporting YOLO model to OpenVINO format"
-	@uv run yolo export model=yolo11n.pt format=openvino int8=True data=coco.yaml imgsz=640
+	@echo "🚀 Exporting YOLO model to OpenVINO format using the $(DATASET) dataset"
+	@uv run yolo export model=yolo11n.pt format=openvino int8=True data=$(DATASET) imgsz=640
 	@uv run python -c "import shutil, os; \
 	shutil.rmtree('yolo_openvino_model', ignore_errors=True); \
 	shutil.move('yolo11n_int8_openvino_model', 'yolo_openvino_model') if os.path.exists('yolo11n_int8_openvino_model') else None"

@@ -25,6 +25,7 @@ Before starting the application, you must export the raw YOLO weights into the h
 ```bash
 make model
 ```
+Note that this will download the full COCO dataset which can take a lot of time and disk space. If you accept slightly lower accuracy, you can use the much smaller COCO128 dataset, by running `make model DATASET=coco128.yaml` instead.
 
 ## Usage
 Start the local backend server by running:
