@@ -38,9 +38,9 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/MLWeber/taubenturret_backend"
-Repository = "https://github.com/MLWeber/taubenturret_backend"
-Documentation = "https://github.com/MLWeber/taubenturret_backend"
+Homepage = "https://github.com/MLWeber/taubenturret-backend"
+Repository = "https://github.com/MLWeber/taubenturret-backend"
+Documentation = "https://github.com/MLWeber/taubenturret-backend"
 
 [build-system]
 requires = ["hatchling"]
