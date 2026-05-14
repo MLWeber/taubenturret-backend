@@ -2,7 +2,7 @@
 export
 
 API_HOST ?= 0.0.0.0
-API_PORT ?= 8080
+API_PORT ?= 8081
 DATASET ?= coco.yaml
 
 .PHONY: install

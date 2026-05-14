@@ -19,7 +19,7 @@ COPY yolo_openvino_model/ ./yolo_openvino_model/
 
 # Set environment variables
 ENV API_HOST=0.0.0.0
-ENV API_PORT=8080
+ENV API_PORT=8081
 
 EXPOSE 8080
 CMD ["sh", "-c", "exec uvicorn taubenturret_backend.api:create_app --host $API_HOST --port $API_PORT --factory"]
