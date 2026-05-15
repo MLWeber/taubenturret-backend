@@ -1,9 +1,9 @@
 # taubenturret-backend
 
-An object detection backend for the [TaubenTurret system](https://github.com/MLWeber/taubenturret), utilizing YOLO and OpenVINO for high-speed inference.
+An object detection backend for the [TaubenTurret system]([https://github.com/MLWeber/taubenturret](https://makerworld.com/de/models/2801562-taubenturret-automated-pigeon-deterrent), utilizing YOLO and OpenVINO for high-speed object detection.
 
 ## Features
-* **FastAPI & Uvicorn:** Provides a high-performance REST API to handle inference requests.
+* **REST API** Provides a REST API to handle object detection requests.
 * **YOLO & OpenVINO:** Leverages hardware-agnostic, heavily optimized INT8 object detection for fast CPU processing.
 * **Image Collection:** Automatically saves incoming detections, allowing you to manually categorize true/false positives for future custom model calibration.
 * **Docker Ready:** Easily build and deploy the backend as a lightweight, platform-independent container.
@@ -28,11 +28,6 @@ make model
 Note that this will download the full COCO dataset which can take a lot of time and disk space. If you accept slightly lower accuracy, you can use the much smaller COCO128 dataset, by running `make model DATASET=coco128.yaml` instead.
 
 ## Usage
-Start the local backend server by running:
-```bash
-make run
-```
-
 ### Docker Deployment
 Build and run the image:
 ```bash
@@ -43,6 +38,12 @@ docker run -d -p 8081:8081 -v ./images:/app/images taubenturret-backend:latest
 Or use docker-compose:
 ```bash
 docker compose up -d
+```
+
+### Without Docker
+Start the local backend server by running:
+```bash
+make run
 ```
 
 Once running, the API provides the following endpoints:
