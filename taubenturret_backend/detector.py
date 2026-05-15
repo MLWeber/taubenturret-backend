@@ -32,7 +32,7 @@ class Detector:
         self.model = YOLO(model, task="detect")
 
         # Map class names to their IDs dynamically using the loaded model
-        self.class_name_to_id = {name: class_id for class_id, name in self.model.names.items()}
+        self.class_name_to_id = {name: class_id for class_id, name in self.model.names.items() if name != "person"}
 
     def analyze(self, img: Image.Image, classes: list[str] | None = None) -> list[dict[str, Any]]:
         included_classes = None
