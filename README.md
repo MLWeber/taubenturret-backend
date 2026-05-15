@@ -1,6 +1,6 @@
 # taubenturret-backend
 
-An object detection backend for the [TaubenTurret system]([https://github.com/MLWeber/taubenturret](https://makerworld.com/de/models/2801562-taubenturret-automated-pigeon-deterrent), utilizing YOLO and OpenVINO for high-speed object detection.
+An object detection backend for the [TaubenTurret system](https://makerworld.com/de/models/2801562-taubenturret-automated-pigeon-deterrent), utilizing YOLO and OpenVINO for high-speed object detection.
 
 ## Features
 * **REST API** Provides a REST API to handle object detection requests.
